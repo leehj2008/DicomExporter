@@ -14,12 +14,6 @@
 	<classpathentry kind="lib" path="lib/jaxb-impl-2.3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="lib/poi-4.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/poi-examples-4.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/poi-excelant-4.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-4.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-4.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/poi-scratchpad-4.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-3.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/dcm4che-core-2.0.29.jar"/>
 	<classpathentry kind="lib" path="lib/dcm4che-filecache-2.0.29.jar"/>
@@ -28,5 +22,20 @@
 	<classpathentry kind="lib" path="lib/dcm4che-tool-dcmqr-2.0.28.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/joinery-dataframe-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/super-csv-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="lib/xchart-2.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/dcm4che-core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/dcm4che-image-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/dcm4che-imageio-rle-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/dcm4che-net-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/dcm4che-tool-storescp-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/dcm4che-tool-common-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/logback-classic-1.1.11.jar"/>
+	<classpathentry kind="lib" path="lib/logback-core-1.1.11.jar"/>
+	<classpathentry kind="lib" path="config"/>
+	<classpathentry kind="lib" path="lib/freemarker-2.3.26-incubating.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

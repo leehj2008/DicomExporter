@@ -1,0 +1,1 @@
+java -cp config;bin;lib/* com.ge.si.dcmexport.GUI

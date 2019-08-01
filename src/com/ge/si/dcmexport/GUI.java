@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ListIterator;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -25,10 +27,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import joinery.DataFrame;
+
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame implements ActionListener{  
     JButton sourceBtn=null;  
+    JButton viewExcelBtn=null;  
     JLabel sourceLbl = null;
     JTextField sourceTxt = null;
     
@@ -40,6 +45,12 @@ public class GUI extends JFrame implements ActionListener{
     JLabel statusLabel = null;
     JButton startBtn = null;
 	static Logger log = Logger.getLogger(GUI.class);
+	AppConfig config;
+	
+	DicomService dcmService;
+	
+	ReadExcelJoiner readExcelJoiner = new ReadExcelJoiner();
+	
     public static void main(String[] args) {  
         GUI gui = new GUI();
     }  
@@ -54,6 +65,7 @@ public class GUI extends JFrame implements ActionListener{
     	}
         this.setLayout(new GridBagLayout());
     	sourceBtn=new JButton("选择Excel");  
+    	viewExcelBtn=new JButton("预览Excel");  
     	sourceLbl=new JLabel("Excel 文件:");  
     	sourceTxt=new JTextField(100);
     	if(!StringUtils.isEmpty(sourceDir)){
@@ -77,6 +89,8 @@ public class GUI extends JFrame implements ActionListener{
     	GridBagConstraints cons = new GridBagConstraints();
     	cons.gridx=2;cons.gridy=0;cons.gridheight=1;cons.gridwidth=1;
         this.add(sourceBtn,cons);  
+    	cons.gridx=3;cons.gridy=0;cons.gridheight=1;cons.gridwidth=1;
+        this.add(viewExcelBtn,cons);  
         cons.gridx=0;cons.gridy=0;
         this.add(sourceLbl,cons); 
         cons.gridx=1;cons.gridy=0;
@@ -115,7 +129,20 @@ public class GUI extends JFrame implements ActionListener{
         this.setVisible(true);  
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
         sourceBtn.addActionListener(this);  
+        viewExcelBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DataFrame df = readExcelJoiner.readExcel(sourceTxt.getText());
+				df.show();
+			}
+		});  
         destBtn.addActionListener(this);  
+        
+        
+        config = AppConfig.getInstance();
+    	dcmService = new DicomService();
+    	dcmService.storeSCP();
     }  
     private void startAction() {
     	File sf = new File(sourceTxt.getText());
@@ -137,7 +164,7 @@ public class GUI extends JFrame implements ActionListener{
             
         }else if(df.isFile()){  
             meta+=" \ndest 文件:"+df.getAbsolutePath();
-            status="dest 选 择了文件夹";
+            status="dest 选 择了文件";
         } 
     	metaLabel.setText(meta);
     	statusLabel.setText(status);
@@ -145,7 +172,17 @@ public class GUI extends JFrame implements ActionListener{
 			
 			@Override
 			public void run() {
-		        //api.processNDPI();
+				DataFrame df = readExcelJoiner.readExcel(sourceTxt.getText());
+
+				statusLabel.setText("读取Excel成功,正在导出...");
+				ListIterator<Map> rows = df.itermap();
+				for(;rows.hasNext();){
+					Map row = rows.next();
+					metaLabel.setText(row.toString());
+					dcmService.dcmMove(row);
+				}
+				startBtn.setEnabled(true);
+				statusLabel.setText("任务结束");
 			}
 		}).start();
     	startBtn.setEnabled(false);
@@ -160,7 +197,6 @@ public class GUI extends JFrame implements ActionListener{
     	}if(!StringUtils.isEmpty(destTxt.getText())){
     		defDir=destTxt.getText();
     	}
-        // TODO Auto-generated method stub  
         JFileChooser jfc=new JFileChooser(defDir);  
         jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );  
         jfc.showDialog(new JLabel(), "Choose "+source.getText());  
@@ -178,7 +214,7 @@ public class GUI extends JFrame implements ActionListener{
         System.out.println(jfc.getSelectedFile().getName());  
         
         System.out.println(source.getText());
-        if("Source".equals(source.getText())){
+        if(sourceBtn==source){
         	sourceTxt.setText(file.getAbsolutePath());
         	try{
         		FileUtils.writeStringToFile(new File("sourcedir.txt"), file.getAbsolutePath());
@@ -186,7 +222,7 @@ public class GUI extends JFrame implements ActionListener{
         		
         	}
         }
-        if("Destination".equals(source.getText())){
+        if(destBtn==source){
         	destTxt.setText(file.getAbsolutePath());
         	try{
         		FileUtils.writeStringToFile(new File("destdir.txt"), file.getAbsolutePath());

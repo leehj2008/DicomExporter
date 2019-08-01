@@ -14,14 +14,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ReadExcel {
 
 	public static void main(String[] args) {
-		new ReadExcel().readExcel();
+		new ReadExcel().readExcel("export.xls");
 	}
 
-	private void readExcel() {
+	private void readExcel(String file) {
 
 		try {
 			// 1、获取文件输入流
-			InputStream inputStream = new FileInputStream("/Users/lihaijiang/Documents/Files/export.xlsx");
+			InputStream inputStream = new FileInputStream(file);
 			// 2、获取Excel工作簿对象
 			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 			// 3、得到Excel工作表对象
