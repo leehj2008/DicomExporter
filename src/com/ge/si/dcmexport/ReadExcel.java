@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ReadExcel {
 
@@ -23,11 +23,11 @@ public class ReadExcel {
 			// 1、获取文件输入流
 			InputStream inputStream = new FileInputStream(file);
 			// 2、获取Excel工作簿对象
-			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+			//XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 			// 3、得到Excel工作表对象
-			XSSFSheet sheetAt = workbook.getSheetAt(0);
+			//XSSFSheet sheetAt = workbook.getSheetAt(0);
 			// 4、循环读取表格数据
-			for (Row row : sheetAt) {
+			/*for (Row row : sheetAt) {
 				// 首行（即表头）不读取
 				if (row.getRowNum() == 0) {
 					continue;
@@ -38,9 +38,9 @@ public class ReadExcel {
 				String type = row.getCell(2).getStringCellValue();
 				System.out.println(pid + "|" + date + "|" + type);
 
-			}
+			}*/
 			// 5、关闭流
-			workbook.close();
+			//workbook.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
