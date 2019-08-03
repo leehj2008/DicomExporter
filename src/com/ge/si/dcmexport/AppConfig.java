@@ -9,6 +9,7 @@ public class AppConfig {
 	public static String SCP_LOCAL_AE = "scp.localAE";
 	public static String SCP_LOCAL_PORT = "scp.localPort";
 	public static String SCP_FILEPATH = "scp.filepath";
+	public static String SCP_DIRECTORY = "scp.directory";
 
 	public static String MOVE_LOCAL_AE = "move.localAE";
 	public static String MOVE_DEST_AE = "move.destAE";

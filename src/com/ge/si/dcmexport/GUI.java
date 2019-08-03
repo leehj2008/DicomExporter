@@ -98,15 +98,15 @@ public class GUI extends JFrame implements ActionListener{
         
         //dest button
         cons.gridx=2;cons.gridy=1;
-        this.add(destBtn,cons);  
+        //this.add(destBtn,cons);  
         cons.gridx=0;cons.gridy=1;
-        this.add(destLbl,cons);  
+        //this.add(destLbl,cons);  
         cons.gridx=1;cons.gridy=1;
-        this.add(destTxt,cons); 
+        //this.add(destTxt,cons); 
         
         //start button
         startBtn = new JButton("开始导出");
-        cons.gridx=3;cons.gridy=1;
+        cons.gridx=1;cons.gridy=1;
         this.add(startBtn,cons);
         startBtn.addActionListener(new ActionListener() {
 			

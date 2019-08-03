@@ -45,6 +45,7 @@ public class ReadExcelJoiner {
 
 			@Override
 			public Object apply(Object value) {
+				if(value==null)return value;
 				System.out.println(value);
 				if (value instanceof Double || value instanceof Long) {
 					System.out.println("Doulble Or Long");

@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.dcm4che2.tool.dcmqr.DcmQR;
-import org.dcm4che3.tool.storescp.StoreSCP;
+import org.dcm4che2.tool.dcmrcv.DcmRcv;
 
 public class DicomService {
 	String localAE="";
@@ -48,19 +48,15 @@ public class DicomService {
 	}
 	
 	public void storeSCP(){
-		StoreSCP scp = null;
-		try {
-			scp = new StoreSCP();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		String filepath = AppConfig.getInstance().getProperty(AppConfig.SCP_FILEPATH);
+		String directory = AppConfig.getInstance().getProperty(AppConfig.SCP_DIRECTORY);
 		String localAE = AppConfig.getInstance().getProperty(AppConfig.SCP_LOCAL_AE);
 		String localPort = AppConfig.getInstance().getProperty(AppConfig.SCP_LOCAL_PORT);
 		
-		String [] args = {"-b",localAE+":"+localPort,"--filepath="+filepath};
-		StoreSCP.main(args);
-		System.out.println("STORESCP Started...");
+		String [] args = {localAE+":"+localPort,"-dest",directory,"-filepath="+filepath};
+		DcmRcv.main(args);
+		System.out.println("DCMRCV Started...");
 	}
 	
 
