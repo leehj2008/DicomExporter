@@ -45,13 +45,17 @@ public class ReadExcelJoiner {
 
 			@Override
 			public Object apply(Object value) {
-//				System.out.println(value);
+				System.out.println(value);
 				if (value instanceof Double || value instanceof Long) {
+					System.out.println("Doulble Or Long");
 					value = nf.format(value);
 				}
 				if(value instanceof Date){
 					value = sdf.format(value);
+
+					System.out.println("Date");
 				}
+				System.out.println("class:"+value.getClass());
 				return value;
 			}};
 		dataframe  = dataframe.apply(function);
